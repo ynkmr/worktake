@@ -1,0 +1,15 @@
+#Mon Feb 24 12:51:59 CST 2014
+eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/view/approve.jsp=UTF-8
+encoding//WebRoot/WEB-INF/view/dictionary.jsp=UTF-8
+encoding//WebRoot/WEB-INF/view/login.jsp=UTF-8
+encoding//WebRoot/WEB-INF/view/subdic.jsp=UTF-8
+encoding//WebRoot/WEB-INF/view/users.jsp=UTF-8
+encoding//WebRoot/WEB-INF/view/userwork.jsp=UTF-8
+encoding//WebRoot/WEB-INF/view/workitems.jsp=UTF-8
+encoding//WebRoot/get.json=UTF-8
+encoding//WebRoot/js/itemtypes.json=UTF-8
+encoding//src/com/gallops/controller/ResultController.java=UTF-8
+encoding//src/com/gallops/controller/UserController.java=UTF-8
+encoding//src/com/gallops/controller/WorkItemController.java=UTF-8
+encoding/src=UTF-8

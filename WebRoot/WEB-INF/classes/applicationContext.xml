@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/tx">
+	
+	<context:property-placeholder location="classpath:properties/jdbc.properties" />  
+	
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${driver}" />  
+        <property name="url" value="${url}" />  
+        <property name="username" value="${username}" />  
+        <property name="password" value="${password}" />
+        <property name="maxActive" value="100"></property>
+        <property name="maxIdle" value="30"></property>
+        <property name="maxWait" value="500"></property>
+        <property name="defaultAutoCommit" value="true"></property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:com/gallops/data/mysql/Configuration.xml"></property>
+        <property name="dataSource" ref="dataSource" />
+        <!-- <property name="mapperLocations" value="classpath*:com/gallops/data/*.xml" /> -->
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">  
+        <constructor-arg index="0" ref="sqlSessionFactory" />  
+    </bean>
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="userService" class="com.gallops.service.UserService">  
+       <property name="sqlSession" ref="sqlSessionTemplate" />  
+    </bean>
+    
+    <bean id="WorkItemService" class="com.gallops.service.WorkItemService">  
+       <property name="sqlSession" ref="sqlSessionTemplate" />  
+    </bean>
+    
+    <bean id="ResultService" class="com.gallops.service.ResultService">  
+       <property name="sqlSession" ref="sqlSessionTemplate" />  
+    </bean>
+    
+    <bean id="AuthUserApprService" class="com.gallops.service.AuthUserApprService">  
+       <property name="sqlSession" ref="sqlSessionTemplate" />  
+    </bean>
+    
+    <bean id="DictionaryService" class="com.gallops.service.DictionaryService">  
+       <property name="sqlSession" ref="sqlSessionTemplate" />  
+    </bean>
+    
+    <bean id="UserWorkService" class="com.gallops.service.UserWorkService">  
+       <property name="sqlSession" ref="sqlSessionTemplate" />  
+    </bean>
+    
+    <bean id="ApproveService" class="com.gallops.service.ApproveService">  
+       <property name="sqlSession" ref="sqlSessionTemplate" />  
+    </bean>
+
+    <!-- <bean id="UserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.gallops.data.UserMapper"></property>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean> -->
+
+</beans>

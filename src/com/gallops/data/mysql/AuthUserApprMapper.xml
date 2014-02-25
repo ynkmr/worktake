@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AuthUserApprMapper">   
+    <select id="findById" parameterType="java.lang.String" resultType="AuthUserApprove">  
+        select * from r_auth_user_approve where id=#{id}  
+    </select>
+    <select id="select" resultType="AuthUserApprove">
+		select * from r_auth_user_approve 
+	</select>
+	<insert id="insert" parameterType="AuthUserApprove">
+		insert into r_auth_user_approve (id,user_id,approve_user_id,prity_level)
+			values (#{id},#{user_id},#{approve_user_id},#{prity_level})
+	</insert>
+    <insert id="insertByMap" parameterType="hashmap">
+		insert into r_auth_user_approve (id,user_id,approve_user_id,prity_level)
+			values (#{id},#{user_id},#{approve_user_id},#{prity_level})
+	</insert>
+	<update id="update" parameterType="AuthUserApprove">
+		update r_auth_user_approve set user_id = #{user_id}, approve_user_id = #{approve_user_id},
+			prity_level = #{prity_level} where id = #{id}
+	</update>
+	<update id="updateByMap" parameterType="hashmap">
+		update r_auth_user_approve set user_id = #{user_id}, approve_user_id = #{approve_user_id},
+			prity_level = #{prity_level} where id = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from r_auth_user_approve where id = #{id}
+	</delete>
+	<delete id="deleteByUserid" parameterType="java.lang.String">
+		delete from r_auth_user_approve where user_id = #{user_id}
+	</delete>
+</mapper>

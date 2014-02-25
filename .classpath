@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/mybatis-3.2.4.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/mysql-connector-java-5.1.8.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/AppUtil.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/mybatis-spring-1.2.2.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-aop-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-aspects-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-beans-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-build-src-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-context-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-context-support-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-core-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-expression-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-instrument-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-instrument-tomcat-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-jdbc-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-jms-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-orm-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-oxm-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-struts-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-test-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-tx-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-web-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-webmvc-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/spring-webmvc-portlet-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-dbcp-1.2.1.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-io-1.2.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-pool-1.3.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/ezmorph-1.0.2.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/jackson-core-asl-1.8.7.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/jackson-mapper-asl-1.8.7.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/jbarcode-0.2.8.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/log4j-1.2.11.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/pinyin4j-2.5.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DictionaryMapper">   
+    <select id="findById" parameterType="java.lang.String" resultType="Dictionary">  
+        select * from e_dictionary where id=#{id}  
+    </select>
+    <select id="select" resultType="hashmap">
+		select *, parent_id as _parentId from e_dictionary 
+	</select>
+	<select id="selectTop" resultType="hashmap">
+		select *, parent_id as _parentId from e_dictionary where type = 0 order by code
+	</select>
+	<select id="selectSub" resultType="hashmap">
+		select *, parent_id as _parentId from e_dictionary where type = 1 order by code
+	</select>
+	<select id="selectOthers" parameterType="java.lang.String" resultType="hashmap">
+		select id,name as text,code,parent_id as _parentId,all_ids from e_dictionary where id != #{id} 
+	</select>
+	<select id="selectTopLevel" resultType="hashmap">
+		select id,name as text,code,parent_id as _parentId,all_ids from e_dictionary where type = 0 
+	</select>
+	<select id="selectSubLevel" parameterType="java.lang.String" resultType="hashmap">
+		select id,name as text,code,parent_id as _parentId,all_ids from e_dictionary where all_ids like #{dicid} order by all_ids
+	</select>
+	<select id="selectAllSubLevel" resultType="hashmap">
+		select id,name as text,code,parent_id as _parentId,all_ids from e_dictionary where type = 1 order by all_ids
+	</select>
+    <insert id="insert" parameterType="Dictionary">
+		insert into e_dictionary (id,name,code,parent_id,
+			type,all_ids)
+			values (#{id},#{name},#{code},#{parent_id},
+			#{type},#{all_ids})
+	</insert>
+	<update id="update" parameterType="Dictionary">
+		update e_dictionary set name = #{name}, code = #{code}, parent_id = #{parent_id},
+			type = #{type}, all_ids = #{all_ids}
+			where id = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from e_dictionary where id = #{id}
+	</delete>
+</mapper>

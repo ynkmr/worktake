@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ResultMapper">   
+    <select id="findById" parameterType="java.lang.String" resultType="Result">  
+        select * from r_user_work where id=#{id}  
+    </select>
+    <select id="select" resultType="Result">
+		select * from r_user_work 
+	</select>
+	<select id="selectNotApproved" parameterType="java.lang.String" resultType="Result">
+		select * from r_user_work where user_id in (select id from user where first_approve_id = #{id}  or second_approve_id = #{id}  or third_approve_id = #{id})
+	</select>
+    <insert id="insert" parameterType="Result">
+		insert into r_user_work (id,user_id,approve_id,
+			work_item_id,work_s_time,work_e_time,status)
+			values (#{id},#{user_id},#{approve_id},
+			#{work_item_id},#{work_s_time},#{work_e_time},#{status})
+	</insert>
+	<insert id="insertByMap" parameterType="hashmap">
+		insert into r_user_work (id,user_id,approve_id,
+			work_item_id,work_s_time,work_e_time,status)
+			values (#{id},#{user_id},#{approve_id},
+			#{work_item_id},#{work_s_time},#{work_e_time},#{status})
+	</insert>
+	<update id="update" parameterType="Result">
+		update r_user_work set user_id = #{user_id}, work_item_id = #{work_item_id}, work_s_time = #{work_s_time}
+			, approve_id = #{approve_id}, work_e_time = #{work_e_time}, status = #{status}
+			where id = #{id}
+	</update>
+	<update id="updateByMap" parameterType="hashmap">
+		update r_user_work set user_id = #{user_id}, work_item_id = #{work_item_id}, work_s_time = #{work_s_time}
+			, approve_id = #{approve_id}, work_e_time = #{work_e_time}, status = #{status}
+			where id = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from r_user_work where id = #{id}
+	</delete>
+</mapper>

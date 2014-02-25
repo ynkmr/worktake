@@ -1,0 +1,1 @@
+[{"id":"dev","text":"开发","children":[{"id":"dev-01","text":"需求"},{"id":"dev-02","text":"设计"},{"id":"dev-03","text":"编码"},{"id":"dev-04","text":"测试"},{"id":"dev-05","text":"实施"}]},{"id":"mgm","text":"管理","children":[{"id":"mgm-01","text":"招商"},{"id":"mgm-02","text":"申报"},{"id":"mgm-03","text":"策划"},{"id":"mgm-04","text":"人力"},{"id":"mgm-05","text":"财务"}]}]

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserWorkMapper">   
+    <select id="findById" parameterType="java.lang.String" resultType="UserWork">  
+        select * from r_user_work where id=#{id}  
+    </select>
+    <select id="select" resultType="UserWork">
+		select * from r_user_work 
+	</select>
+	<select id="selectToApprove" parameterType="java.lang.String" resultType="hashmap">
+		select *, (select name from e_dictionary where id = a.dic_id) dic_name,
+ 			(select name from e_dictionary where id = a.sub_dic_id) sub_dic_name,
+ 			(select all_ids from e_dictionary where id = a.sub_dic_id) all_ids,
+ 			(SELECT name from e_user where id = a.user_id) user_name,
+ 			CONCAT(DATE_FORMAT(a.s_time,'%Y-%m-%d'),'至' ,DATE_FORMAT(a.e_time,'%Y-%m-%d')) log_date, case ifnull(status, '') when '' then '0' else status end statusv from r_user_work a where a.user_id in (
+			SELECT user_id FROM r_auth_user_approve where approve_user_id = #{id}) ORDER BY user_id
+	</select>
+	<select id="selectView" parameterType="java.lang.String" resultType="hashmap">
+		SELECT *, (select name from e_dictionary where id = a.dic_id) dic_name,
+ 			(select name from e_dictionary where id = a.sub_dic_id) sub_dic_name,
+ 			(select all_ids from e_dictionary where id = a.sub_dic_id) all_ids,
+ 			(SELECT name from e_user where id = a.user_id) user_name,
+ 			CONCAT(DATE_FORMAT(a.s_time,'%Y-%m-%d'),'至' ,DATE_FORMAT(a.e_time,'%Y-%m-%d')) log_date, case ifnull(status, '') when '' then '0' else status end statusv FROM r_user_work a
+ 			where user_id = #{id}
+	</select>
+	<select id="selectSql" parameterType="SqlAdapter" resultType="hashmap">
+		${sql}
+	</select>
+    <insert id="insert" parameterType="UserWork">
+		insert into r_user_work (id,user_id,approve_user_id,dic_id,sub_dic_id,
+			s_time,e_time,status,memo)
+			values (#{id},#{user_id},#{approve_user_id},#{dic_id},#{sub_dic_id},
+			#{s_time},#{e_time},#{status},#{memo})
+	</insert>
+	<update id="update" parameterType="UserWork">
+		update r_user_work set user_id = #{user_id}, approve_user_id = #{approve_user_id}, dic_id = #{dic_id},
+			s_time = #{s_time}, e_time = #{e_time}, status = #{status}, memo = #{memo}, sub_dic_id = #{sub_dic_id} 
+			where id = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from r_user_work where id = #{id}
+	</delete>
+</mapper>

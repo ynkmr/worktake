@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">   
+    <select id="findById" parameterType="java.lang.String" resultType="User">  
+        select * from e_user where id=#{id}  
+    </select>
+    <select id="select" resultType="User">
+		select * from e_user 
+	</select>
+	<select id="findByCodeAndPwd" parameterType="User" resultType="User">
+		select * from e_user where code = #{code} and password = #{password}
+	</select>
+	<select id="selectView" resultType="hashmap">
+		SELECT a.*, (SELECT b.approve_user_id from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 1) first_approve_id,
+			(SELECT (select name from e_user where id =b.approve_user_id) from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 1) first_approve_name
+			, (SELECT b.approve_user_id from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 2) second_approve_id
+			, (SELECT (select name from e_user where id =b.approve_user_id) from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 2) second_approve_name
+			, (SELECT b.approve_user_id from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 3) third_approve_id
+			, (SELECT (select name from e_user where id =b.approve_user_id) from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 3) third_approve_name FROM e_user a
+	</select>
+	<select id="selectViewById" parameterType="java.lang.String" resultType="hashmap">
+		SELECT a.*, (SELECT b.approve_user_id from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 1) first_approve_id
+			, (SELECT b.approve_user_id from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 2) second_approve_id
+			, (SELECT b.approve_user_id from r_auth_user_approve b where b.user_id = a.id and b.prity_level = 3) third_approve_id FROM e_user a
+			where a.id = #{id} 
+	</select>
+	<select id="selectOthers" parameterType="java.lang.String" resultType="User">
+		select id,name,code from e_user where id != #{id} 
+	</select>
+    <insert id="insertByMap" parameterType="hashmap">
+		insert into e_user (id,name,code,create_time,email,mobie_phone,password,memo)
+			values (#{id},#{name},#{code},#{create_time},#{email},#{mobie_phone},#{password},#{memo})
+	</insert>
+	<insert id="insert" parameterType="User">
+		insert into e_user (id,name,code,create_time,email,mobie_phone,password,memo)
+			values (#{id},#{name},#{code},#{create_time},#{email},#{mobie_phone},#{password},#{memo})
+	</insert>
+	<update id="update" parameterType="User">
+		update e_user set name = #{name}, password = #{password},
+			code = #{code}, email = #{email}, mobie_phone = #{mobie_phone}, password = #{password}, memo = #{memo}
+			where id = #{id}
+	</update>
+	<update id="updateByMap" parameterType="hashmap">
+		update e_user set name = #{name}, password = #{password},
+			code = #{code}, email = #{email}, mobie_phone = #{mobie_phone}, password = #{password}, memo = #{memo}
+			where id = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from e_user where id = #{id}
+	</delete>
+</mapper>

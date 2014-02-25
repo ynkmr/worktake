@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WorkItemMapper">   
+    <select id="findById" parameterType="java.lang.String" resultType="WorkItem">  
+        select * from e_work_item where id=#{id}  
+    </select>
+    <select id="select" resultType="WorkItem">
+		select * from e_work_item 
+	</select>
+    <insert id="insert" parameterType="WorkItem">
+		insert into e_work_item (id,name,code,upper_work_id,
+			upper_all_ids,type_id)
+			values (#{id},#{name},#{code},#{upper_work_id},
+			#{upper_all_ids},#{type_id})
+	</insert>
+	<update id="update" parameterType="WorkItem">
+		update e_work_item set name = #{name}, code = #{code}, upper_work_id = #{upper_work_id},
+			upper_all_ids = #{upper_all_ids}, type_id = #{type_id}
+			where id = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from e_work_item where id = #{id}
+	</delete>
+</mapper> 
