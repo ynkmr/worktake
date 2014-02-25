@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>  
-        <typeAlias type="com.gallops.model.User" alias="User" />
-        <typeAlias type="com.gallops.model.WorkItem" alias="WorkItem" />
-        <typeAlias type="com.gallops.model.Result" alias="Result" />
-        <typeAlias type="com.gallops.model.AuthUserApprove" alias="AuthUserApprove" />
-        <typeAlias type="com.gallops.model.Dictionary" alias="Dictionary" />
-        <typeAlias type="com.gallops.model.UserWork" alias="UserWork" />
-        <typeAlias type="com.gallops.data.SQLAdapter" alias="SqlAdapter"/>
-    </typeAliases> 
-	<!-- <environments default="development">
-		<environment id="development">
-			<transactionManager type="JDBC"/>
-			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.jdbc.Driver"/>
-				<property name="url" value="jdbc:mysql://localhost:3307/worktake"/>
-				<property name="username" value="root"/>
-				<property name="password" value="root"/>
-			</dataSource>
-		</environment>
-	</environments> -->
+	<typeAliases>
+		<typeAlias type="com.gallops.model.User" alias="User" />
+		<typeAlias type="com.gallops.model.WorkItem" alias="WorkItem" />
+		<typeAlias type="com.gallops.model.Result" alias="Result" />
+		<typeAlias type="com.gallops.model.AuthUserApprove" alias="AuthUserApprove" />
+		<typeAlias type="com.gallops.model.Dictionary" alias="Dictionary" />
+		<typeAlias type="com.gallops.model.UserWork" alias="UserWork" />
+		<typeAlias type="com.gallops.data.SQLAdapter" alias="SqlAdapter" />
+		<typeAlias type="com.gallops.model.Organization" alias="Organization" />
+	</typeAliases>
+	<!-- <environments default="development"> <environment id="development"> 
+		<transactionManager type="JDBC"/> <dataSource type="POOLED"> <property name="driver" 
+		value="com.mysql.jdbc.Driver"/> <property name="url" value="jdbc:mysql://localhost:3307/worktake"/> 
+		<property name="username" value="root"/> <property name="password" value="root"/> 
+		</dataSource> </environment> </environments> -->
 	<mappers>
-		<mapper resource="com/gallops/data/mysql/UserMapper.xml"/>
-		<mapper resource="com/gallops/data/mysql/WorkItemMapper.xml"/>
-		<mapper resource="com/gallops/data/mysql/ResultMapper.xml"/>
-		<mapper resource="com/gallops/data/mysql/AuthUserApprMapper.xml"/>
-		<mapper resource="com/gallops/data/mysql/DictionaryMapper.xml"/>
-		<mapper resource="com/gallops/data/mysql/UserWorkMapper.xml"/>
+		<mapper resource="com/gallops/data/mysql/UserMapper.xml" />
+		<mapper resource="com/gallops/data/mysql/WorkItemMapper.xml" />
+		<mapper resource="com/gallops/data/mysql/ResultMapper.xml" />
+		<mapper resource="com/gallops/data/mysql/AuthUserApprMapper.xml" />
+		<mapper resource="com/gallops/data/mysql/DictionaryMapper.xml" />
+		<mapper resource="com/gallops/data/mysql/UserWorkMapper.xml" />
+		<mapper resource="com/gallops/data/mysql/OrganizationMapper.xml"/>
 	</mappers>
 </configuration>
