@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a href="javascript:void(0)" class="btn btn-success" plain="true" onclick="del();">删除</a>
 		</div>
     	<div class="form-group">
-			<table id="tg" class="easyui-datagrid"
+			<table id="tg" class="easyui-treegrid"
 			            data-options="iconCls: 'icon-ok',
 			                rownumbers: true,
 			                animate: true,
@@ -52,8 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			            <tr>
 			                <th data-options="field:'name',width:200">部门名称</th>
 			                <th data-options="field:'code',width:60,align:'right'">编号</th>
-			                <th data-options="field:'first_approve_name',width:80">上级部门</th>
-			                <th data-options="field:'second_approve_name',width:80">部门负责人</th>
+			                <th data-options="field:'user_name',width:80">部门负责人</th>
 			                <th data-options="field:'telephone',width:80">联系电话</th>
 			                <th data-options="field:'email',width:80">电子邮件</th>
 			                <th data-options="field:'memo',width:80">备注</th>
@@ -78,23 +77,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input class="easyui-validatebox" id="id_id" name="id" type="text" style="display:none">
 			</div>
 			<div class="form-group">	
-				<label for="first_approve_id">上级部门：</label>
-				<select class="easyui-combogrid" id="id_first_approve_id" name="first_approve_id" data-options="
-			            panelWidth: 250,
-			            idField: 'id',
-			            textField: 'name',
-			            method: 'get',
-			            columns: [[
-			                {field:'name',title:'部门名称',width:120},
-			                {field:'code',title:'部门编号',width:130}
-			            ]],
-			            fitColumns: true
-			        ">
-			    </select>
+				<label for="parent_id">上级部门：</label>
+			    <input class="easyui-combotree" id="id_parent_id" name="parent_id" data-options="cascadeCheck:false,onlyLeafCheck:true">
 			</div>
 			<div class="form-group">
-				<label for="second_approve_id">部门负责人：</label>
-				<select class="easyui-combogrid" id="id_second_approve_id" name="second_approve_id" data-options="
+				<label for="superior_id">部门负责人：</label>
+				<select class="easyui-combogrid" id="id_superior_id" name="superior_id" data-options="
 			            panelWidth: 250,
 			            idField: 'id',
 			            textField: 'name',
@@ -116,22 +104,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
 			function add(){
 				$('#fm').form('clear');
-				$('#id_first_approve_id').combogrid({
-    				url: '/WorkTakeService/organization/allOthers.do?id=0'});
-    			$('#id_second_approve_id').combogrid({
-    				url: '/WorkTakeService/user/allothers.do?id=0'});
+				$('#id_parent_id').combotree({url: '/WorkTakeService/organization/alltree.do?id=0'});
+				$('#id_superior_id').combogrid({url: '/WorkTakeService/user/all.do'});
 				$('#w').window('open');
 			 }
 			 
-			 function onDblClickRow(index){
+			 function onDblClickRow(row){
 	            $('#fm').form('clear');
-	            var row = $('#tg').datagrid('getRows')[index];
 	            var id = row['id'];
-	            var superiorId = $('#id_second_approve_id').combogrid('getValue');
-	            $('#id_first_approve_id').combogrid({
-    				url: '/WorkTakeService/organization/allOthers.do?id=' + id});
-    			$('#id_second_approve_id').combogrid({
-    				url: '/WorkTakeService/user/allothers.do?id=' + superiorId});	
+	            $('#id_parent_id').combotree({url: '/WorkTakeService/organization/alltree.do?id=' + row['id']});
+    			$('#id_superior_id').combogrid({url: '/WorkTakeService/user/all.do'});	
 	            $('#fm').form('load', row);
 	            $('#w').window('open');
 	        }
@@ -144,8 +126,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var fdata = {
 					name: $('#id_name').val(),
 					code: $('#id_code').val(),
-					parent_id: $('#id_first_approve_id').combogrid('getValue'),
-					superior_id: $('#id_second_approve_id').combogrid('getValue'),
+					parent_id: $('#id_parent_id').combotree('getValue'),
+					superior_id: $('#id_superior_id').combogrid('getValue'),
 					memo: $('#id_memo').val(),
 					email: $('#id_email').val(),
 					telephone: $('#id_telephone').val(),
@@ -162,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					error: function(){alert('保存失败！请稍后重试');},
 					success: function(result){
 						$('#w').window('close');
-						$('#tg').datagrid('reload', {
+						$('#tg').treegrid('reload', {
 							url: '/WorkTakeService/organization/all.do',
 							method: 'get'
 						});

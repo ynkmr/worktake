@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="WorkTakeService"
+  name="worktake"
   id="myeclipse.1392343893992"
   context-root="/WorkTakeService"
   j2ee-spec="6.0"
-  archive="WorkTakeService.war">
+  archive="worktake.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>

@@ -1,5 +1,6 @@
 package com.gallops.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,15 +25,25 @@ public class OrganizationController {
 
 	@RequestMapping("/organization/all.do")
 	@ResponseBody
-	public List<Map<String, String>> list() {
+	public Map<String, Object> list() {
 		List<Map<String, String>> list = organizationService.selectView();
+		Map<String, Object> obj = new HashMap<String, Object>();
+		obj.put("rows", list);
+		obj.put("total", list.size());
+		return obj;
+	}
+	
+	@RequestMapping("/organization/alltree.do")
+	@ResponseBody
+	public List<Map<String, Object>> selectTree() {
+		List<Map<String, Object>> list = organizationService.selectTree();
 		return list;
 	}
 
 	@RequestMapping("/organization/allOthers.do")
 	@ResponseBody
-	public List<Organization> listOthers(@RequestParam("id") String id) {
-		List<Organization> lst = organizationService.findAllOthers(id);
+	public List<Map<String, Object>> listOthers(@RequestParam("id") String id) {
+		List<Map<String, Object>> lst = organizationService.findAllOthers(id);
 		return lst;
 	}
 

@@ -40,6 +40,17 @@ public class OrganizationService {
 		}
 		return organizations;
 	}
+	
+	public List<Map<String, Object>> selectTree() {
+		List<Map<String, Object>> organizations = null;
+		try {
+			organizations = sqlSession.selectList("OrganizationMapper.selectTree");
+			organizations = DictionaryService.recursionList(organizations);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return organizations;
+	}
 
 	public List<Organization> findAll() {
 		List<Organization> organizations = null;
@@ -51,11 +62,12 @@ public class OrganizationService {
 		return organizations;
 	}
 
-	public List<Organization> findAllOthers(String id) {
-		List<Organization> organizations = null;
+	public List<Map<String, Object>> findAllOthers(String id) {
+		List<Map<String, Object>> organizations = null;
 		try {
 			organizations = sqlSession.selectList(
 					"OrganizationMapper.findAllOthers", id);
+			organizations = DictionaryService.recursionList(organizations);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

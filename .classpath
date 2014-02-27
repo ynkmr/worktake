@@ -43,6 +43,7 @@
 	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-beanutils-1.7.0.jar"/>
 	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-collections-3.2.jar"/>
 	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/pinyin4j-2.5.0.jar"/>
+	<classpathentry kind="lib" path="E:/work/gallops/work/reflib/commons-lang-2.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>

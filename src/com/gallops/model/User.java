@@ -11,6 +11,7 @@ public class User {
     private String email;
     private String mobie_phone;
     private String password;
+    private String org_id;
 	public String getId() {
 		return id;
 	}
@@ -58,6 +59,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getOrg_id() {
+		return org_id;
+	}
+	public void setOrg_id(String org_id) {
+		this.org_id = org_id;
 	}
     
 

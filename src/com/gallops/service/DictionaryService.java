@@ -81,7 +81,7 @@ public class DictionaryService {
         return objs;
     }
     
-	private List<Map<String, Object>> recursionList(List<Map<String, Object>> lst) {
+	public static List<Map<String, Object>> recursionList(List<Map<String, Object>> lst) {
 		Map<String, Object> preitem = null;
 		List<Map<String, Object>> rtn = new ArrayList<Map<String,Object>>();
 		Map<Integer, List<Map<String, Object>>> stacks = new HashMap<Integer, List<Map<String,Object>>>();

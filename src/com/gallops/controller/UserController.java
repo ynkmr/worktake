@@ -78,67 +78,48 @@ public class UserController {
 	
 	@RequestMapping(value="/user/save.do", method=RequestMethod.POST)
 	@ResponseBody
-	public int save(@RequestBody Map<String, String> obj) {
+	public int saveUser(@RequestBody Map<String, String> obj) {
     	int rtn = -1;
     	if(obj.containsKey("id") && (obj.get("id").length() > 0)) {
     		rtn = service.updateByMap(obj);
-    		if(rtn >=0) {
-    			String first = obj.get("first_approve_id");
-    			String second = obj.get("second_approve_id");
-    			String third = obj.get("third_approve_id");
-    			authService.deleteByUserid(obj.get("id"));
-    			if(first.length() > 0) {
-    				AuthUserApprove item = new AuthUserApprove();
-    				item.setApprove_user_id(first);
-    				item.setPrity_level(1);
-    				item.setUser_id(obj.get("id"));
-    				authService.insert(item);
-    			}
-    			if(second.length() > 0) {
-    				AuthUserApprove item = new AuthUserApprove();
-    				item.setApprove_user_id(second);
-    				item.setPrity_level(2);
-    				item.setUser_id(obj.get("id"));
-    				authService.insert(item);
-    			}
-    			if(third.length() > 0) {
-    				AuthUserApprove item = new AuthUserApprove();
-    				item.setApprove_user_id(third);
-    				item.setPrity_level(3);
-    				item.setUser_id(obj.get("id"));
-    				authService.insert(item);
-    			}
-    		}
     	} else {
     		String id = StringConvert.getUUIDString();
     		obj.put("id", id);
     		rtn = service.insertByMap(obj);
-    		if(rtn >=0) {
-    			String first = obj.get("first_approve_id");
-    			String second = obj.get("second_approve_id");
-    			String third = obj.get("third_approve_id");
-    			if(first.length() > 0) {
-    				AuthUserApprove item = new AuthUserApprove();
-    				item.setApprove_user_id(first);
-    				item.setPrity_level(1);
-    				item.setUser_id(obj.get("id"));
-    				authService.insert(item);
-    			}
-    			if(second.length() > 0) {
-    				AuthUserApprove item = new AuthUserApprove();
-    				item.setApprove_user_id(second);
-    				item.setPrity_level(2);
-    				item.setUser_id(obj.get("id"));
-    				authService.insert(item);
-    			}
-    			if(third.length() > 0) {
-    				AuthUserApprove item = new AuthUserApprove();
-    				item.setApprove_user_id(third);
-    				item.setPrity_level(3);
-    				item.setUser_id(obj.get("id"));
-    				authService.insert(item);
-    			}
-    		}
+    	}
+    	return rtn;
+    }
+	
+	@RequestMapping(value="/auth/saveauthapprove.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int saveAuthApprove(@RequestBody Map<String, String> obj) {
+    	int rtn = -1;
+    	if(obj.containsKey("id") && (obj.get("id").length() > 0)) {
+			String first = obj.get("first_approve_id");
+			String second = obj.get("second_approve_id");
+			String third = obj.get("third_approve_id");
+			authService.deleteByUserid(obj.get("id"));
+			if(first.length() > 0) {
+				AuthUserApprove item = new AuthUserApprove();
+				item.setApprove_user_id(first);
+				item.setPrity_level(1);
+				item.setUser_id(obj.get("id"));
+				authService.insert(item);
+			}
+			if(second.length() > 0) {
+				AuthUserApprove item = new AuthUserApprove();
+				item.setApprove_user_id(second);
+				item.setPrity_level(2);
+				item.setUser_id(obj.get("id"));
+				authService.insert(item);
+			}
+			if(third.length() > 0) {
+				AuthUserApprove item = new AuthUserApprove();
+				item.setApprove_user_id(third);
+				item.setPrity_level(3);
+				item.setUser_id(obj.get("id"));
+				authService.insert(item);
+			}
     	}
     	return rtn;
     }
@@ -153,6 +134,11 @@ public class UserController {
 	@RequestMapping("/user/view.do")
 	public String view_main() {
     	return "users";
+    }
+	
+	@RequestMapping("/auth/approve_view.do")
+	public String view_auth_approve() {
+    	return "authapprove";
     }
 	
 }

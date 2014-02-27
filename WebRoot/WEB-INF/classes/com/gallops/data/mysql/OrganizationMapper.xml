@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrganizationMapper">
+	<select id="findById" parameterType="java.lang.String"
+		resultType="Organization">
+		select * from e_organization where id=#{id}
+	</select>
+	<select id="findAll" resultType="Organization">
+		select * from e_organization
+		order by all_ids
+	</select>
+	<select id="findAllOthers" parameterType="java.lang.String"
+		resultType="Organization">
+		select a.id,a.name,a.code, (select name from e_user where id = a.superior_id) user_name, a.name as text from e_organization a where a.id != #{id} order by a.all_ids 
+	</select>
+	<select id="selectView" resultType="hashmap">
+		select *,(select name from e_user where id = a.superior_id) user_name, parent_id as _parentId  from e_organization a
+	</select>
+	<select id="selectTree" resultType="hashmap">
+		select *, (select name from e_user where id = a.superior_id) user_name, name as text from e_organization a order by a.all_ids
+	</select>
+	<select id="findByName" parameterType="java.lang.String"
+		resultType="Organization">
+		select * from e_organization where name like
+		CONCAT('%',#{name},'%')
+	</select>
+	<select id="findByUser" parameterType="java.lang.String"
+		resultType="Organization">
+		select o.* from e_organization o join r_user_org r on o.id
+		= r.org_id where r.user_id = #{userId}
+	</select>
+	<insert id="insert" parameterType="Organization">
+		insert into
+		e_organization(id,name,code,email,telephone,superior_id,parent_id,all_ids,memo)
+		values
+		(#{id},#{name},#{code},#{email},#{telephone},#{superior_id},#{parent_id},#{all_ids},#{memo})
+	</insert>
+	<insert id="insertByMap" parameterType="hashmap">
+		insert into
+		e_organization(id,name,code,email,telephone,superior_id,parent_id,all_ids,memo)
+		values
+		(#{id},#{name},#{code},#{email},#{telephone},#{superior_id},#{parent_id},#{all_ids},#{memo})
+	</insert>
+	<update id="update" parameterType="Organization">
+		update e_organization set name
+		= #{name}, code = #{password},
+		email = #{email}, telephone =
+		#{telephone},superior_id = #{superior_id}, parent_id = #{parent_id},
+		all_ids = #{all_ids}, memo =
+		#{memo} where id = #{id}
+	</update>
+	<update id="updateByMap" parameterType="hashmap">
+		update e_organization set name
+		= #{name}, code = #{password},
+		email = #{email}, telephone =
+		#{telephone},superior_id = #{superior_id}, parent_id = #{parent_id},
+		all_ids = #{all_ids}, memo =
+		#{memo} where id = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from e_organization
+		where id = #{id}
+	</delete>
+</mapper>

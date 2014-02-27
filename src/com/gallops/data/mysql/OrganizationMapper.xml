@@ -11,10 +11,13 @@
 	</select>
 	<select id="findAllOthers" parameterType="java.lang.String"
 		resultType="Organization">
-		select id,name,code from e_organization where id != #{id}
+		select a.id,a.name,a.code, (select name from e_user where id = a.superior_id) user_name, a.name as text from e_organization a where a.id != #{id} order by a.all_ids 
 	</select>
 	<select id="selectView" resultType="hashmap">
-		select a.*,b.id as second_approve_id, b.name as second_approve_name from (select o.*,p.id as first_approve_id,p.name as first_approve_name from e_organization o left join e_organization p on o.parent_id = p.id) a left join e_user b on a.superior_id = b.id
+		select *,(select name from e_user where id = a.superior_id) user_name, parent_id as _parentId  from e_organization a
+	</select>
+	<select id="selectTree" resultType="hashmap">
+		select *, (select name from e_user where id = a.superior_id) user_name, name as text from e_organization a order by a.all_ids
 	</select>
 	<select id="findByName" parameterType="java.lang.String"
 		resultType="Organization">

@@ -5,7 +5,7 @@
         select * from r_auth_user_approve where id=#{id}  
     </select>
     <select id="select" resultType="AuthUserApprove">
-		select * from r_auth_user_approve 
+		select * from r_auth_user_approve
 	</select>
 	<insert id="insert" parameterType="AuthUserApprove">
 		insert into r_auth_user_approve (id,user_id,approve_user_id,prity_level)
