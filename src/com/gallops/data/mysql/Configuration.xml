@@ -10,6 +10,7 @@
 		<typeAlias type="com.gallops.model.UserWork" alias="UserWork" />
 		<typeAlias type="com.gallops.data.SQLAdapter" alias="SqlAdapter" />
 		<typeAlias type="com.gallops.model.Organization" alias="Organization" />
+		<typeAlias type="com.gallops.model.Report" alias="Report" />
 	</typeAliases>
 	<!-- <environments default="development"> <environment id="development"> 
 		<transactionManager type="JDBC"/> <dataSource type="POOLED"> <property name="driver" 
@@ -24,5 +25,6 @@
 		<mapper resource="com/gallops/data/mysql/DictionaryMapper.xml" />
 		<mapper resource="com/gallops/data/mysql/UserWorkMapper.xml" />
 		<mapper resource="com/gallops/data/mysql/OrganizationMapper.xml"/>
+		<mapper resource="com/gallops/data/mysql/ReportMapper.xml"/>
 	</mappers>
 </configuration>
