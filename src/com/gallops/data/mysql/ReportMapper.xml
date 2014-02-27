@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReportMapper">
+	<select id="findByConditions" parameterType="Report" resultType="Report">
+		SELECT
+		    *
+		FROM
+		    v_report v ,
+		    (
+		        SELECT
+		            SUM(take_time) top_sum_time ,
+		            top_dic_id
+		        FROM
+		            v_report
+		         where take_time is not null
+	        	<if test="top_dic_name != '' &amp;&amp; top_dic_name != null">
+					and INSTR(top_dic_name, #{top_dic_name}) > 0
+				</if>
+				<if test="s_time != null &amp;&amp; s_time != ''">
+					and s_time >= #{s_time}
+				</if>
+				<if test="e_time != null &amp;&amp; e_time != ''">
+					and e_time &lt;= #{e_time}
+				</if>
+		        GROUP BY
+		            top_dic_id
+		    ) top_sum ,
+		    (
+		        SELECT
+		            SUM(take_time) sub_sum_time ,
+		            sub_dic_id
+		        FROM
+		            v_report
+		        where take_time is not null
+	        	<if test="sub_dic_name != '' &amp;&amp; sub_dic_name != null">
+					and INSTR(sub_dic_name, #{sub_dic_name}) > 0
+				</if>
+				<if test="s_time != null &amp;&amp; s_time != ''">
+					and s_time >= #{s_time}
+				</if>
+				<if test="e_time != null &amp;&amp; e_time != ''">
+					and e_time &lt;= #{e_time}
+				</if>
+		        GROUP BY
+		            sub_dic_id
+		    ) sub_sum
+		WHERE
+		    v.top_dic_id = top_sum.top_dic_id
+		    AND v.sub_dic_id = sub_sum.sub_dic_id
+		    AND v.take_time is not null
+		<if test="top_dic_name != '' &amp;&amp; top_dic_name != null">
+			and INSTR(top_dic_name, #{top_dic_name}) > 0
+		</if>
+		<if test="sub_dic_name != '' &amp;&amp; sub_dic_name != null">
+			and INSTR(sub_dic_name, #{sub_dic_name}) > 0
+		</if>
+		<if test="org_name != '' &amp;&amp; org_name != null">
+			and INSTR(org_name, #{org_name}) > 0
+		</if>
+		<if test="user_name != '' &amp;&amp; user_name != null">
+			and INSTR(user_name, #{user_name}) > 0
+		</if>
+		<if test="s_time != null &amp;&amp; s_time != ''">
+			and s_time >= #{s_time}
+		</if>
+		<if test="e_time != null &amp;&amp; e_time != ''">
+			and e_time &lt;= #{e_time}
+		</if>
+		order by all_ids
+	</select>
+</mapper>
